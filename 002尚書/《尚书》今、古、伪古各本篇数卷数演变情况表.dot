@@ -1,0 +1,129 @@
+digraph "《尚书》今、古、伪古各本篇数卷数演变情况表" {
+
+	node [ fontname="Microsoft YaHei" ];
+	edge [ fontname="Microsoft YaHei" ];
+
+    size="7,8";
+
+// 时间轴
+    node [fontsize=24, shape = plaintext];
+
+    hanchu [label="汉初"]
+    hanwudi [label="汉武帝时"]
+    xihanxuandi [label="西汉宣帝以后"]
+    aiping [label="哀平之世"]
+    donghan [label="东汉"]
+    wei [label="魏"]
+    dongjin [label="东晋"]
+    // anchor [label=""][shape="none"][style="invis"]
+    tang [label="唐"]
+    song [label="宋以后"]
+    edge [style="invis"]
+    
+    splines=false;
+    edge [style="dotted"];
+    // splients=false;
+    hanchu -> hanwudi -> xihanxuandi;
+    xihanxuandi -> aiping -> donghan -> wei;
+    wei -> dongjin -> tang -> song;
+
+// 实线部分
+    splines=true;
+    node [fontsize=20, shape=box];
+    {rank=same; hanchu FUSHENG;}
+
+    edge [dir=none,style=solid];
+    FUSHENG [label="伏生本\n28篇"]
+	XIAHOU [label="大、小夏侯氏本\n经29篇\n章句29篇"];
+	OUYANG [label="立学官欧阳氏本\n经29篇\n28+太誓"];
+	OUYANGBENJING [label="欧阳本经29篇\n32卷\n章句31+书序=32\n（29+盘庚2=31）"];
+	HANSHIJING [label="汉石经\n（隶书）\n29篇+序\n金文32卷"]
+	DULIN [label="杜林漆书古文本\n（以古文改写今文）\n29篇\n马、郑注本34篇\n（29+盘庚2太誓2康王之诰1）\n（亦冒称孔壁本58篇虚数）"];
+	WEISHIJING [label="魏石经\n（古、篆、隶三体）\n古文34篇\n13卷"];
+	KONGZI [label="孔子家传本\n29篇加十余篇"]
+	MAZHENG [label="马、郑注百篇书序"]
+	TANGSHIJING [label="唐石经\n（由隶古定改楷书）\n伪古文13卷\n58篇\n（真33+伪25）"];
+	KANBEN [label="各种刊本\n孔传本13卷58篇\n注疏本20卷58篇\n集传本6卷58篇"];
+	LIUXIN [label="刘歆倡中秘孔壁本\n29+16=45篇\n《七略》：46卷（45+书序）\n《别录》：58篇\n（ 29+盘庚2太誓2\n康王之诰=34\n16+九共8=24\n34+24=58\n《新论》：45卷、48篇"];
+	DONGHANZHULU [label="《汉 艺文志》： 46卷 57篇\n郑玄《叙赞》：58-武成=57\n马融《书叙》：逸十六篇绝无师说"];
+
+
+	FUSHENG -> XIAHOU;
+	FUSHENG -> OUYANG;
+	OUYANG -> XIAHOU;
+	OUYANG -> OUYANGBENJING;
+	OUYANGBENJING -> HANSHIJING;
+	XIAHOU -> DULIN;
+	DULIN -> WEISHIJING;
+	SHUXU -> MAZHENG
+	helper -> TANGSHIJING -> KANBEN;
+	KONGZI -> LIUXIN -> DONGHANZHULU;
+
+
+	{rank=same; hanwudi OUYANG KONGZI;}
+    {rank=same; xihanxuandi XIAHOU;}
+    {rank=same; HANSHIJING donghan DULIN;}
+    {rank=same; wei WEISHIJING;}
+    {rank=same; donghan MAZHENG;}
+    {rank=same;tang;TANGSHIJING;}
+    {rank=same;song;KANBEN;}
+    {rank=same;donghan;DONGHANZHULU;}
+    {rank=same;aiping;LIUXIN;}
+
+
+// 虚线部分
+    edge [style=dotted;]
+
+    OUYANGBENJING -> DULIN;
+
+// 箭头部分
+
+    edge [dir=same;style=solid;]
+
+    {rank=same; hanchu;TAISHI}
+
+
+    TAISHI -> OUYANG;
+    "史记、左传" -> SHUXU
+
+    TAISHI[label="太誓篇"];
+    SHUXU -> LIUXIN;
+        
+	newrank=true;
+//  https://stackoverflow.com/questions/6824431/placing-clusters-on-the-same-rank-in-graphviz
+
+
+	{rank=same;SHUXU;xihanxuandi;}
+    subgraph cluster_XU {
+        label = "(成帝时）\n两百篇";
+        fontname="Microsoft YaHei";
+        SHUXU [label="书序"];
+
+    }
+
+    subgraph cluster_WEIGUWEN {
+    	label = "伪古文尚书本\n（孔传本）";
+    	fontname="Microsoft YaHei";
+    	box1 [label="29-太誓=28\n28中析增舜典\n益稷\n康王之诰\n+盘庚2\n——————\n真古文  33篇"];
+    	box2 [label="伪\n古\n文\n25\n篇\n（包\n括\n伪\n泰\n誓）"];
+    	node1 [shape=plaintext,label="13卷、58篇"]
+    	box3 [label="书\n序\n分\n散\n配\n于\n各\n篇"];
+    	box2 -> node1[style="invis"];
+    	box1 -> helper[style="invis"];
+    	helper [shape="none"][style="invis"][label=""];
+    }
+    {rank=same;box1;box2;box3;dongjin}
+    DULIN -> box1;
+    SHUXU -> box3;
+    SHUXU -> OUYANGBENJING;
+
+
+}
+
+// References:
+
+// http://www.graphviz.org/doc/info/lang.html
+// https://blog.csdn.net/qq_23994787/article/details/104012614
+// https://stackoverflow.com/questions/23255271/graphviz-dot-placing-node-inside-subgraph-even-though-it-was-defined-elsewhere
+// https://stackoverflow.com/questions/6824431/placing-clusters-on-the-same-rank-in-graphviz
+// https://stackoverflow.com/questions/41242581/graphviz-ordering-node-in-a-cluster
