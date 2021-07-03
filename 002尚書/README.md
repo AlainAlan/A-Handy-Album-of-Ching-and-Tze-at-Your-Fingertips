@@ -10,6 +10,8 @@
     - [ ] 陳夢家
     - [ ] 程元敏
 - [ ] 尚書傳授表
+    - [x] 《尚书》今、古、伪古各本篇数卷数演变情况表（刘起釪《尚书学史》插页）
+    - [ ] 西汉《今文尚书》传授系统表（刘起釪《尚书学史》插页）
 - [x] 尚書篇目大致亡佚時間表
 - [ ] 尚書師說大致亡佚時間表
 
@@ -22,6 +24,12 @@
 [mermaid-js/mermaid-live-editor: Edit, preview and share mermaid charts/diagrams. New implementation of the live editor.](https://github.com/mermaid-js/mermaid-live-editor)
 
 [Mermaid live editor](https://mermaid-js.github.io/mermaid-live-editor/)
+
+### Graphviz
+
+```
+dot -Tsvg hhh.dot -o hhh.svg
+```
 
 ## 參考文獻
 
